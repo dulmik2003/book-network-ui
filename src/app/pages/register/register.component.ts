@@ -10,7 +10,7 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, NgIf, NgFor ,ApiModule, HttpClientModule],
+  imports: [FormsModule, NgIf, NgFor ,ApiModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
