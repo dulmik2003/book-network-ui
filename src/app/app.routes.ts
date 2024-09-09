@@ -11,5 +11,9 @@ export const routes: Routes = [
     {
         path: "activate-account",
         component: ActivateAccountComponent
+    },
+    {
+        path: "login",
+        component: LoginComponent
     }
 ];
