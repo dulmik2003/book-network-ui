@@ -5,6 +5,10 @@ import { ActivateAccountComponent } from './pages/activate-account/activate-acco
 
 export const routes: Routes = [
     {
+        path: "",
+        component: LoginComponent
+    },
+    {
         path: "register",
         component: RegisterComponent
     },
@@ -15,5 +19,9 @@ export const routes: Routes = [
     {
         path: "login",
         component: LoginComponent
+    },
+    {
+        path: "books",
+        loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule)
     }
 ];
