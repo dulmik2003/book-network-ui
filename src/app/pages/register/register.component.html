@@ -2,41 +2,70 @@
   <div class="container card login-container">
     <h3 class="text-center">Create an account</h3>
     <hr>
-    <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
+    <!-- <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
       <p *ngFor="let msg of errorMsg">{{msg}}</p>
-    </div>
+    </div> -->
 
-    <div class="mb-3">
-      <label for="firstname" class="form-label">Firstname</label>
-      <input [(ngModel)]="registerRequest.firstName" type="text" class="form-control" id="firstname"
-        placeholder="Firstname">
-    </div>
+    <form (ngSubmit)="onSubmit()" #formRegistration="ngForm">
+      <div class="mb-3">
+        <label for="firstname" class="form-label">Firstname</label>
+        <input [(ngModel)]="registerRequest.firstName" type="text" class="form-control"
+          [class.is-invalid]="firstName.invalid && (firstName.dirty || firstName.touched)" id="firstname" required
+          name="firstName" placeholder="Firstname" #firstName="ngModel">
 
-    <div class="mb-3">
-      <label for="lastname" class="form-label">Lastname</label>
-      <input [(ngModel)]="registerRequest.lastName" type="text" class="form-control" id="lastname"
-        placeholder="Lastname">
-    </div>
+        @if (firstName.invalid && firstName.touched && firstName.hasError('required')) {
+        <div class="invalid-feedback">Firstname is required.</div>
+        }
+      </div>
 
-    <div class="mb-3">
-      <label for="login" class="form-label">Email address</label>
-      <input [(ngModel)]="registerRequest.email" type="email" class="form-control" id="login"
-        placeholder="name@example.com">
-    </div>
+      <div class="mb-3">
+        <label for="lastname" class="form-label">Lastname</label>
+        <input [(ngModel)]="registerRequest.lastName" type="text" class="form-control" id="lastname" required
+          [class.is-invalid]="lastname.invalid && (lastname.dirty || lastname.touched)" placeholder="Lastname"
+          name="lastname" #lastname="ngModel">
 
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input [(ngModel)]="registerRequest.password" type="password" class="form-control" id="password"
-        placeholder="Password">
-    </div>
+        @if (lastname.invalid && lastname.touched && lastname.hasError('required')) {
+        <div class="invalid-feedback">Lastname is required.</div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input [(ngModel)]="registerRequest.email" type="email" class="form-control" id="email" required
+          [class.is-invalid]="email.invalid && (email.dirty || email.touched)" placeholder="name@example.com"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" name="email" #email="ngModel">
+
+        @if (email.invalid && email.touched && email.hasError('required')) {
+        <div class="invalid-feedback">Email is required.</div>
+        }
+
+        @if (email.invalid && email.dirty && email.hasError('pattern')) {
+        <div class="invalid-feedback">Email is invalid.</div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input [(ngModel)]="registerRequest.password" type="password" class="form-control" id="password" required
+          [class.is-invalid]="password.invalid && (password.dirty || password.touched)" placeholder="Password"
+          minlength="9" maxlength="15" name="password" #password="ngModel">
+
+        @if (password.invalid && password.touched && password.hasError('required')) {
+        <div class="invalid-feedback">Password is required.</div>
+        }
+        @if (password.invalid && password.touched && password.hasError('minlength')) {
+        <div class="invalid-feedback">Password can contain minimum 9 and maximum 15 charqacters.</div>
+        }
+      </div>
+    </form>
 
     <div class="d-flex justify-content-between mb-3">
-      <button (click)="register()" type="button" class="btn btn-primary">
-        <em class="fas fa-sign-in-alt">&nbsp;Create an account</em>
+      <button (click)="register()" type="button" [disabled]="formRegistration.form.invalid" class="btn btn-primary">
+        Create an account
       </button>
       <div>
         Already have an account?&nbsp;
-        <button (click)="login()" type="button" class="btn btn-link">
+        <button (click)="nevigateToLoginPage()" type="button" class="btn btn-link">
           Login
         </button>
       </div>

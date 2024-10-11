@@ -10,12 +10,12 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, NgIf, NgFor ,ApiModule],
+  imports: [FormsModule, NgIf, NgFor, ApiModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  registerRequest: RegisterRequest = {email: '', firstName: '', lastName: '', password: ''};
+  registerRequest: RegisterRequest = { email: '', firstName: '', lastName: '', password: '' };
   errorMsg: Array<string> = [];
 
   constructor(
@@ -25,9 +25,11 @@ export class RegisterComponent {
     // console.log('RegisterComponent loaded...');
   }
 
-  login() {
+  nevigateToLoginPage() {
     this.router.navigate(['login']);
   }
+
+  onSubmit() {}
 
   register() {
     this.errorMsg = [];
@@ -40,7 +42,7 @@ export class RegisterComponent {
         },
         error: (err) => {
           console.log(err.error);
-          
+
           this.errorMsg = err.error.validationErrors;
         }
       });

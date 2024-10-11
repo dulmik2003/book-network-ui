@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthenticationRequest } from '../../services/models';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/services';
-import { NgFor, NgIf } from '@angular/common';
 import { ApiModule } from '../../services/api.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenService } from '../../services/token/token.service';
@@ -11,7 +10,7 @@ import { TokenService } from '../../services/token/token.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, NgIf, NgFor, ApiModule],
+  imports: [FormsModule, ApiModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
